@@ -263,10 +263,12 @@ export function updateUsuario(usuario) {
         data.set('_method', 'PATCH');
         data.set("nombre", usuario.nombre);
         data.set("email", usuario.email);
-        data.set("password", usuario.password);
         data.set("rol_id", usuario.rol_id);
         data.set("telefono", usuario.telefono);
         data.append("imagePerfil", usuario.imagePerfil);
+        if (usuario.password !== undefined) {
+            data.set("password", usuario.password);
+        }
 
         return ApiService.post(`/usuarios/${usuario.hashId}`, data, config)
             .then((response) => {
